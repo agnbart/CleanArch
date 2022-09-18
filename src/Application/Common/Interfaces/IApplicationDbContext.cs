@@ -10,6 +10,7 @@ public interface IApplicationDbContext
     DbSet<TodoItem> TodoItems { get; }
 
     DbSet<Contract> Contracts { get; }
+    DbSet<Contractor> Contractors { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
