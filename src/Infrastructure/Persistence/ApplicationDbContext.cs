@@ -33,6 +33,8 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
 
     public DbSet<Contract> Contracts => Set<Contract>();
 
+    public DbSet<Contractor> Contractors => Set<Contractor>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
