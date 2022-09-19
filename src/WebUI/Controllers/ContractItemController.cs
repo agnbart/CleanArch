@@ -8,6 +8,11 @@ namespace CleanArchitecture.WebUI.Controllers;
 [ApiController]
 public class ContractItemController : ApiControllerBase
 {
+    [HttpGet]
+    public async Task<ActionResult<int>> Get()
+    {
+        return await Mediator.Send(new)
+    }
 
     // POST api/<ContractItemController>
     [HttpPost]
