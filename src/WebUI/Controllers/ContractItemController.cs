@@ -1,4 +1,5 @@
 ﻿using CleanArchitecture.Application.Contracts.Commands.CreateContract;
+using CleanArchitecture.Application.Contracts.Queries.GetContratcs;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,9 +10,9 @@ namespace CleanArchitecture.WebUI.Controllers;
 public class ContractItemController : ApiControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<int>> Get()
+    public async Task<ActionResult<ContractsVm>> Get()
     {
-        return await Mediator.Send(new)
+        return await Mediator.Send(new GetContractsQuery());
     }
 
     // POST api/<ContractItemController>
