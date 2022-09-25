@@ -7,6 +7,24 @@
   },
   "paths": {
     "/api/ContractItem": {
+      "get": {
+        "tags": [
+          "ContractItem"
+        ],
+        "operationId": "ContractItem_Get",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContractsVm"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "ContractItem"
@@ -506,6 +524,18 @@
   },
   "components": {
     "schemas": {
+      "ContractsVm": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "lists": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContractsVm"
+            }
+          }
+        }
+      },
       "CreateContractCommand": {
         "type": "object",
         "additionalProperties": false,
