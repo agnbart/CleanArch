@@ -1,4 +1,5 @@
-﻿using CleanArchitecture.Domain.Entities;
+﻿using CleanArchitecture.Application.Contracts.Queries.GetContracts;
+using CleanArchitecture.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitecture.Application.Common.Interfaces;
@@ -14,4 +15,5 @@ public interface IApplicationDbContext
     DbSet<Contractor> Contractors { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+
 }

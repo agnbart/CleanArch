@@ -529,7 +529,25 @@
         "additionalProperties": false,
         "properties": {
           "lists": {
-            "$ref": "#/components/schemas/ContractsVm"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContractDto"
+            }
+          }
+        }
+      },
+      "ContractDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contractId": {
+            "type": "string"
+          },
+          "contractor1": {
+            "type": "string"
+          },
+          "contractor2": {
+            "type": "string"
           }
         }
       },

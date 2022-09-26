@@ -845,7 +845,7 @@ export class WeatherForecastClient implements IWeatherForecastClient {
 }
 
 export class ContractsVm implements IContractsVm {
-    lists?: ContractsVm;
+    lists?: ContractDto[];
 
     constructor(data?: IContractsVm) {
         if (data) {
@@ -858,7 +858,11 @@ export class ContractsVm implements IContractsVm {
 
     init(_data?: any) {
         if (_data) {
-            this.lists = _data["lists"] ? ContractsVm.fromJS(_data["lists"]) : <any>undefined;
+            if (Array.isArray(_data["lists"])) {
+                this.lists = [] as any;
+                for (let item of _data["lists"])
+                    this.lists!.push(ContractDto.fromJS(item));
+            }
         }
     }
 
@@ -871,13 +875,61 @@ export class ContractsVm implements IContractsVm {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["lists"] = this.lists ? this.lists.toJSON() : <any>undefined;
+        if (Array.isArray(this.lists)) {
+            data["lists"] = [];
+            for (let item of this.lists)
+                data["lists"].push(item.toJSON());
+        }
         return data;
     }
 }
 
 export interface IContractsVm {
-    lists?: ContractsVm;
+    lists?: ContractDto[];
+}
+
+export class ContractDto implements IContractDto {
+    contractId?: string;
+    contractor1?: string;
+    contractor2?: string;
+
+    constructor(data?: IContractDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.contractId = _data["contractId"];
+            this.contractor1 = _data["contractor1"];
+            this.contractor2 = _data["contractor2"];
+        }
+    }
+
+    static fromJS(data: any): ContractDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ContractDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["contractId"] = this.contractId;
+        data["contractor1"] = this.contractor1;
+        data["contractor2"] = this.contractor2;
+        return data;
+    }
+}
+
+export interface IContractDto {
+    contractId?: string;
+    contractor1?: string;
+    contractor2?: string;
 }
 
 export class CreateContractCommand implements ICreateContractCommand {
