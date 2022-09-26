@@ -845,7 +845,7 @@ export class WeatherForecastClient implements IWeatherForecastClient {
 }
 
 export class ContractsVm implements IContractsVm {
-    lists?: ContractsVm[];
+    lists?: ContractsVm;
 
     constructor(data?: IContractsVm) {
         if (data) {
@@ -858,11 +858,7 @@ export class ContractsVm implements IContractsVm {
 
     init(_data?: any) {
         if (_data) {
-            if (Array.isArray(_data["lists"])) {
-                this.lists = [] as any;
-                for (let item of _data["lists"])
-                    this.lists!.push(ContractsVm.fromJS(item));
-            }
+            this.lists = _data["lists"] ? ContractsVm.fromJS(_data["lists"]) : <any>undefined;
         }
     }
 
@@ -875,17 +871,13 @@ export class ContractsVm implements IContractsVm {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.lists)) {
-            data["lists"] = [];
-            for (let item of this.lists)
-                data["lists"].push(item.toJSON());
-        }
+        data["lists"] = this.lists ? this.lists.toJSON() : <any>undefined;
         return data;
     }
 }
 
 export interface IContractsVm {
-    lists?: ContractsVm[];
+    lists?: ContractsVm;
 }
 
 export class CreateContractCommand implements ICreateContractCommand {

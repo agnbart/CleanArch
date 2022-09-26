@@ -529,10 +529,7 @@
         "additionalProperties": false,
         "properties": {
           "lists": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContractsVm"
-            }
+            "$ref": "#/components/schemas/ContractsVm"
           }
         }
       },
